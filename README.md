@@ -1,17 +1,17 @@
 # aoc-2024-in-deno
 
-## Test
-
-```
-$ deno run t <Day>
-$ deno run t 01(or 02, 03...etc)
-```
-
 ## Run
 
 ```
 $ deno run r <Day>
 $ deno run r 01(or 02, 03...etc)
+```
+
+## Test
+
+```
+$ deno run t <Day>
+$ deno run t 01(or 02, 03...etc)
 ```
 
 ## Template
