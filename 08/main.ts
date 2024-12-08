@@ -1,8 +1,11 @@
 export function part1(input: Array<string>) {
+  // Grid
   const grid = input.map(i => i.split(""))
+  // Create set of non-dot strings in input
   const words = new Set(grid.flat())
   words.delete(".")
 
+  // Explore where characters are placed in the grid and store them in a map
   const m: Map<string, Array<number[]>> = new Map()
   for (let i = 0; i < grid.length; i++) {
     for (const w of words) {
@@ -20,14 +23,18 @@ export function part1(input: Array<string>) {
     }
   }
 
+  // Find signal location
   const mmm = []
   let ans = 0
   for (const mv of m.values()) {
+    // Generate combinations between antennas
     const combi = generateCombi(mv)
+    // Find the distance between the antennas and use the results to find the signal range
     for (const c of combi) {
       const f = [c[0][0] - c[1][0], c[0][1] - c[1][1]]
       for (const cc of c) {
         const pl = [cc[0] + f[0], cc[1] + f[1]]
+        // Store the results because the signal will arrive at a location other than the antenna location. 
         if (JSON.stringify(c[0]) !== JSON.stringify(pl) && JSON.stringify(c[1]) !== JSON.stringify(pl)) {
           mmm.push(pl)
         }
@@ -39,8 +46,11 @@ export function part1(input: Array<string>) {
       }
     }
   }
+  
+  // Store the results because the signal will arrive at a location other than the antenna location.
   const e = new Set(mmm.map(mmmm => JSON.stringify(mmmm)))
   const ee = Array.from(e.values().map(me => JSON.parse(me)))
+  // Determine whether it is within the grid and end!
   for (const eee of ee) {
     if (isInGrid(eee[0], eee[1], grid)) {
       ans += 1
