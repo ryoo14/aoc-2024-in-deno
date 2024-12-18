@@ -37,6 +37,9 @@ export function part1(input: Array<string>) {
     while (1) {
       const po = grid[at[0]+dd[0]][at[1]+dd[1]]
       if (po === "#") {
+        if (l.length !== 0) {
+          at = [l[0][0]-dd[0], l[0][1]-dd[1]]
+        }
         break
       } else if (po === "O") {
         l.push([at[0]+dd[0], at[1]+dd[1]])
@@ -55,9 +58,17 @@ export function part1(input: Array<string>) {
         break
       }
     }
-    break
   }
 
+  let ans = 0
+  for (let i = 0; i < grid.length; i++) {
+    for (let l = 0; l < grid[i].length; l++) {
+      if (grid[i][l] === "O") {
+        ans += 100 * i + l
+      }
+    }
+  }
+  return ans
 }
 
 export function part2(input: Array<string>) {
@@ -71,5 +82,5 @@ function parseInput(input: string): Array<string> {
 const rawInput = await Deno.readTextFile(`${import.meta.dirname}/input.txt`)
 const input = parseInput(rawInput)
 
-//console.log(part1(input))
+console.log(part1(input))
 //console.log(part2(input))
